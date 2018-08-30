@@ -11,6 +11,7 @@ class UrunController extends Controller
     {
         $urun = Urun::whereSlug($slug_urunadi)->firstOrFail();
         $kategoriler = $urun->kategoriler()->distinct()->get();
+        $a = 5;
         return view("urun", compact('urun', 'kategoriler'));
     }
     public function ara()
