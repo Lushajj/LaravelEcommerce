@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             @include('layouts.partials.alert')
-            <div class="col-md-3">
+            <div class="col-md-3">s
                 <div class="panel panel-default">
                     <div class="panel-heading">Kategoriler</div>
                     <div class="list-group categories">
