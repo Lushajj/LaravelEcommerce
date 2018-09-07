@@ -21,10 +21,18 @@ Route::get('/kategori/{slug_kategoriadi}', 'KategoriController@index')->name('ka
 
 Route::get('/urun/{slug_urunadi}', 'UrunController@index')->name('urun');
 
-Route::get('/sepet', 'SepetController@index')->name('sepet');
+Route::group(['prefix'=>'sepet'],function (){
+    Route::get('/', 'SepetController@index')->name('sepet');
+    Route::post('/ekle','SepetController@ekle')->name('sepet.ekle');
+    Route::delete('/kaldir{rowId}','SepetController@kaldir')->name('sepet.kaldir');
+    Route::delete('/bosalt','SepetController@bosalt')->name('sepet.bosalt');
+    Route::patch('/guncelle/{rowid}','SepetController@guncelle')->name('sepet.guncelle');
+});
+
+Route::get('/odeme', 'OdemeController@index')->name('odeme');
+Route::post('/odeme', 'OdemeController@odemeyap')->name('odemeyap');
 
 Route::group(['middleware' => 'auth'], function(){
-    Route::get('/odeme', 'OdemeController@index')->name('odeme');
     Route::get('/siparisler', 'SiparisController@index')->name('siparisler');
     Route::get('/siparisler/{id}', 'SiparisController@detay')->name('siparis');
 });
