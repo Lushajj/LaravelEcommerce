@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default tax rate
@@ -25,11 +24,9 @@ return [
     */
 
     'database' => [
-
         'connection' => null,
 
         'table' => 'shoppingcart',
-
     ],
 
     /*
@@ -55,13 +52,8 @@ return [
     */
 
     'format' => [
-
-        'decimals' => 2,
-
-        'decimal_point' => '.',
-
-        'thousand_seperator' => ','
-
+        'decimals' => 2, // ondalık basamak
+        'decimal_point' => ',', // ondalık ayıraç
+        'thousand_seperator' => '.', // binlik ayıraç
     ],
-
 ];

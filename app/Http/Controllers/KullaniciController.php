@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\KullaniciKayitMail;
 use App\Kullanici;
 use Cart;
+use Auth;
 use App\Models\Sepet;
 use App\Models\SepetUrun;
 use App\Models\KullaniciDetay;
@@ -29,12 +30,17 @@ class KullaniciController extends Controller
             'email' => 'required|email',
             'sifre' => 'required'
         ]);
-        if (auth()->attempt(['email'=>request('email'),'password'=>request('sifre')],request()->has('benihatirla'))) {
+        $credentials = [
+            'email' => request('email'),
+            'password' => request('sifre'),
+            'aktif_mi' => 1
+        ];
+        if (auth()->attempt($credentials, request()->has('benihatirla'))) {
             request()->session()->regenerate();
 
             $aktif_sepet_id =  Sepet::aktif_sepet_id();
             if (is_null($aktif_sepet_id)) {
-                $aktif_sepet = Sepet::create(['kullanici_id'=>auth()->id]);
+                $aktif_sepet = Sepet::create(['kullanici_id'=>auth()->id()]);
                 $aktif_sepet_id = $aktif_sepet->id;
             }
             session()->put('aktif_sepet_id', $aktif_sepet_id);

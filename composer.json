@@ -10,7 +10,8 @@
         "fideloper/proxy": "~3.3",
         "gloudemans/shoppingcart": "^2.5",
         "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "unisharp/laravel-filemanager": "~1.8"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

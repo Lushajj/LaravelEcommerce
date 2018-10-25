@@ -12,6 +12,49 @@
 */
 use \Illuminate\Support\Facades\Route;
 
+Route::group(['prefix'=>'yonetim', 'namespace'=>'Yonetim'], function(){
+    Route::redirect('/','/yonetim/oturumac');
+
+    Route::match(['get','post'],'/oturumac','KullaniciController@oturumac')->name('yonetim.oturumac'); // hem get hem post kullanimi
+    Route::get('/oturumukapat','KullaniciController@oturumukapat')->name('yonetim.oturumukapat');
+
+    Route::group(['middleware' => 'yonetim'], function(){
+        Route::get('/anasayfa','AnasayfaController@index')->name('yonetim.anasayfa');
+
+        Route::group(['prefix'=>'kullanici'],function(){
+            Route::match(['get','post'],'/','KullaniciController@index')->name('yonetim.kullanici');
+            Route::get('/yeni','KullaniciController@form')->name('yonetim.kullanici.yeni');
+            Route::get('/duzenle/{id}','KullaniciController@form')->name('yonetim.kullanici.duzenle');
+            Route::post('/kaydet/{id?}','KullaniciController@kaydet')->name('yonetim.kullanici.kaydet');
+            Route::get('/sil/{id}','KullaniciController@sil')->name('yonetim.kullanici.sil');
+        });
+
+        Route::group(['prefix'=>'kategori'],function(){
+            Route::match(['get','post'],'/','KategoriController@index')->name('yonetim.kategori');
+            Route::get('/yeni','KategoriController@form')->name('yonetim.kategori.yeni');
+            Route::get('/duzenle/{id}','KategoriController@form')->name('yonetim.kategori.duzenle');
+            Route::post('/kaydet/{id?}','KategoriController@kaydet')->name('yonetim.kategori.kaydet');
+            Route::get('/sil/{id}','KategoriController@sil')->name('yonetim.kategori.sil');
+        });
+
+        Route::group(['prefix'=>'urun'],function(){
+            Route::match(['get','post'],'/','UrunController@index')->name('yonetim.urun');
+            Route::get('/yeni','UrunController@form')->name('yonetim.urun.yeni');
+            Route::get('/duzenle/{id}','UrunController@form')->name('yonetim.urun.duzenle');
+            Route::post('/kaydet/{id?}','UrunController@kaydet')->name('yonetim.urun.kaydet');
+            Route::get('/sil/{id}','UrunController@sil')->name('yonetim.urun.sil');
+        });
+
+        Route::group(['prefix'=>'siparis'],function(){
+            Route::match(['get','post'],'/','SiparisController@index')->name('yonetim.siparis');
+            Route::get('/yeni','SiparisController@form')->name('yonetim.siparis.yeni');
+            Route::get('/duzenle/{id}','SiparisController@form')->name('yonetim.siparis.duzenle');
+            Route::post('/kaydet/{id?}','SiparisController@kaydet')->name('yonetim.siparis.kaydet');
+            Route::get('/sil/{id}','SiparisController@sil')->name('yonetim.siparis.sil');
+        });
+    });
+});
+
 Route::get('/', 'AnasayfaController@index')->name("anasayfa");
 
 Route::post('/ara','UrunController@ara')->name('urun_ara');

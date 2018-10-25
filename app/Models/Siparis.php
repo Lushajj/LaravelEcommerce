@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use SoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Siparis extends Model
 {
+    use SoftDeletes;
     protected $table = "siparis";
 
     protected $fillable = ['sepet_id','siparis_tutari','adsoyad','adres','telefon','ceptelefon','banka','taksit_sayisi','durum'];
